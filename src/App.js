@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import DetailPage from './pages/DetailPage';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Route exact path="/" component={HomePage} />
+      <Route path="/detail" component={DetailPage} />
+    </>
   );
-}
+};
 
 export default App;
+
+// response:
+//  body:
+//    items:
+//      item: Array(18)
+//        0:
+//          dateKind: "01"
+//          dateName: "1월1일"
+//          isHoliday: "Y"
+//          locdate: 20210101
+//          seq: 1
+
+//dateName, locdate
