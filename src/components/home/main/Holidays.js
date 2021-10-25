@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import moment from "moment";
+
 import Holiday from "./Holiday";
+import HolidayCalender from "./HolidayCalender";
 
 const Holidays = () => {
   const [data, setData] = useState(null);
   const [year, setYear] = useState(new Date().getFullYear());
+  const [currentDate, setCurrentDate] = useState(null);
+  const [flag, setFlag] = useState(false);
 
   const url = `/getHoliDeInfo?serviceKey=${process.env.REACT_APP_API_KEY}&&_type=json&solYear=${year}&numOfRows=50`;
 
@@ -24,13 +29,35 @@ const Holidays = () => {
     //eslint-disable-next-line
   }, []);
 
+  const onClickDate = (selectedDate) => {
+    setCurrentDate(moment(selectedDate?.toString()));
+  };
+
+  const onSelectCalenderDate = (a) => {
+    console.log(a);
+  };
+
   return (
     <>
       <div>
-        <span>1,2,3,4: </span>
         {data?.map((v, i) => (
-          <Holiday key={v.locdate} dateName={v.dateName} date={v.locdate} />
+          <Holiday
+            key={v.locdate}
+            dateName={v.dateName}
+            fullDate={v.locdate}
+            onClickDate={onClickDate}
+          />
         ))}
+        <button onClick={() => setFlag(() => !flag)}>
+          {flag ? "달력 버튼 활성화 하기" : "날짜 버튼 활성화 하기"}
+        </button>
+        <HolidayCalender
+          currentDate={currentDate}
+          onSelectCalenderDate={onSelectCalenderDate}
+          // calenderDate={calenderDate}
+          // onClickDate={onClickDate}
+          flag={flag}
+        />
       </div>
     </>
   );
