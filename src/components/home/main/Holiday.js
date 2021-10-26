@@ -24,7 +24,7 @@ const Boundary = styled.span`
 `;
 
 const Holiday = ({ dateName, fullDate, onClickDate }) => {
-  //값 연산 리렌더링 막기
+  //useMemo로 값 연산 리렌더링 막기
   const monthAndDate = useMemo(() => {
     //년도 잘라내기
     const stringFullDate = fullDate.toString();
@@ -37,14 +37,13 @@ const Holiday = ({ dateName, fullDate, onClickDate }) => {
     const sliceZeroFromDate =
       getDate.charAt(0) === "0" ? getDate.slice(1) : getDate;
 
-    //월, 일 날짜 반환
+    //월, 일 추가한뒤 날짜 반환
     return sliceZeroFromMonth + "월 " + sliceZeroFromDate + "일";
   }, [fullDate]);
 
   const setHoliday = () => {
     return (
       <ButtonWrapper>
-        {/* xml에서는 띄어쓰기를 인식함 */}
         <Button>{dateName}</Button>
         <Boundary></Boundary>
         <Button onClick={() => onClickDate(fullDate)}>{monthAndDate}</Button>
@@ -66,7 +65,7 @@ const Holiday = ({ dateName, fullDate, onClickDate }) => {
   }
 
   //1월1일, 기독탄신일 => 새해, 크리스마스 로 이름 교체
-  if (dateName === "1월1일") {
+  if (dateName === "1월1일" || dateName === "신정") {
     dateName = "새해";
     return <>{setHoliday()}</>;
   }

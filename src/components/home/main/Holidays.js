@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import dayjs from "dayjs";
+import shortid from "shortid";
 import styled from "@emotion/styled";
 
 import HolidayYear from "./HolidayYear";
@@ -17,12 +18,14 @@ const Button = styled.button`
 const Holidays = () => {
   const [holidayData, setHolidayData] = useState(null);
   const [holidayYear, setHolidayYear] = useState(new Date().getFullYear());
-  const [currentDate, setCurrentDate] = useState(null);
-  const [flag, setFlag] = useState(false); // true, false 를 주는 조건 역할
+  const [holidayDate, setHolidayDate] = useState(null);
+  const [holidayDateAgain, setHolidayDateAgain] = useState(null);
+  const [flag, setFlag] = useState(false); // true, false 를 주는 flag변수
 
   const url = `/getHoliDeInfo?serviceKey=${process.env.REACT_APP_API_KEY}&&_type=json&solYear=${holidayYear}&numOfRows=100`;
 
   useEffect(() => {
+    //바로 return 해주면 안되네
     const getHolidaysData = async () => {
       try {
         const response = await axios.get(url);
@@ -34,15 +37,13 @@ const Holidays = () => {
     };
     getHolidaysData();
 
+    //년도가 바뀔때마다 다시 불러오기
     //eslint-disable-next-line
   }, [holidayYear]);
 
   const onClickDate = (selectedDate) => {
-    setCurrentDate(dayjs(selectedDate?.toString()));
-  };
-
-  const onSelectCalenderDate = (a) => {
-    console.log(a);
+    setHolidayDate(dayjs(selectedDate?.toString()));
+    setHolidayDateAgain(selectedDate);
   };
 
   const onPlusAYear = () => {
@@ -62,19 +63,21 @@ const Holidays = () => {
       <div>
         {holidayData?.map((v, i) => (
           <Holiday
-            key={v.locdate}
+            key={shortid.generate()}
             dateName={v.dateName}
             fullDate={v.locdate}
             onClickDate={onClickDate}
           />
         ))}
       </div>
+
       <Button onClick={() => setFlag(() => !flag)}>
         {flag ? "날짜 버튼 활성화 하기" : "달력 버튼 활성화 하기"}
       </Button>
+
       <HolidayCalender
-        currentDate={currentDate}
-        onSelectCalenderDate={onSelectCalenderDate}
+        holidayDate={holidayDate}
+        holidayDateAgain={holidayDateAgain}
         holidayYear={holidayYear}
         flag={flag}
       />
