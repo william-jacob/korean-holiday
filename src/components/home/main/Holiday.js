@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import styled from "@emotion/styled";
+import { Link } from "react-router-dom";
 
 const ButtonWrapper = styled.span`
   display: inline-block; //span에서 padding 사용하기 위함
@@ -26,12 +27,12 @@ const Boundary = styled.span`
 const Holiday = ({ dateName, fullDate, onClickDate }) => {
   //useMemo로 값 연산 리렌더링 막기
   const monthAndDate = useMemo(() => {
-    //년도 잘라내기
+    //년도 잘라냄
     const stringFullDate = fullDate.toString();
     const getMonth = stringFullDate.slice(4, 6);
     const getDate = stringFullDate.slice(6);
 
-    //월,일 앞 숫자 0 잘라내기
+    //월,일 앞 숫자 0 잘라냄
     const sliceZeroFromMonth =
       getMonth.charAt(0) === "0" ? getMonth.slice(1) : getMonth;
     const sliceZeroFromDate =
@@ -44,7 +45,11 @@ const Holiday = ({ dateName, fullDate, onClickDate }) => {
   const setHoliday = () => {
     return (
       <ButtonWrapper>
-        <Button>{dateName}</Button>
+        <Button>
+          <Link to={{ pathname: "/detail", search: `?holiday=${dateName}` }}>
+            {dateName}
+          </Link>
+        </Button>
         <Boundary></Boundary>
         <Button onClick={() => onClickDate(fullDate)}>{monthAndDate}</Button>
       </ButtonWrapper>

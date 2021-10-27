@@ -7,15 +7,10 @@ import dayjs from "dayjs";
 
 const CalenderWrapper = styled.div`
   width: 500px;
-  height: 500px;
+  height: auto;
 `;
 
-const HolidayCalender = ({
-  holidayDate,
-  holidayDateAgain,
-  holidayYear,
-  flag,
-}) => {
+const HolidayCalender = ({ holidayDate, holidayDateAgain, flag }) => {
   const [selectedValue, setSelectedValue] = useState(dayjs());
 
   const holidayFullDate = useMemo(() => {
@@ -38,7 +33,7 @@ const HolidayCalender = ({
           ? getHolidayDate.slice(1)
           : getHolidayDate;
 
-      //년, 월, 일 반환 하기
+      //년, 월, 일로 반환
       return (
         getHolidayYear + ". " + sliceZeroFromMonth + ". " + sliceZeroFromDate
       );

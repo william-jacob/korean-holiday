@@ -37,7 +37,7 @@ const Holidays = () => {
     };
     getHolidaysData();
 
-    //년도가 바뀔때마다 다시 불러오기
+    //년도가 바뀔때마다 다시 불러옴
     //eslint-disable-next-line
   }, [holidayYear]);
 
@@ -71,16 +71,15 @@ const Holidays = () => {
         ))}
       </div>
 
-      <Button onClick={() => setFlag(() => !flag)}>
-        {flag ? "날짜 버튼 활성화 하기" : "달력 버튼 활성화 하기"}
-      </Button>
-
       <HolidayCalender
         holidayDate={holidayDate}
         holidayDateAgain={holidayDateAgain}
-        holidayYear={holidayYear}
         flag={flag}
       />
+
+      <Button onClick={() => setFlag(() => !flag)}>
+        {flag ? "날짜 버튼 활성화 하기" : "달력 버튼 활성화 하기"}
+      </Button>
     </>
   );
 };

@@ -1,14 +1,21 @@
 import React from "react";
-import { Route } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import DetailPage from './pages/DetailPage';
+import { Route, Switch } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import DetailPage from "./pages/DetailPage";
 
 const App = () => {
   return (
-    <>
+    <Switch>
       <Route exact path="/" component={HomePage} />
-      <Route path="/detail" component={DetailPage} />
-    </>
+      <Route exact path="/detail" component={DetailPage} />
+      <Route
+        render={() => {
+          <>
+            <h2>Not Found :(</h2>
+          </>;
+        }}
+      />
+    </Switch>
   );
 };
 
