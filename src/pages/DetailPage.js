@@ -6,14 +6,22 @@ const DetailPage = ({ location }) => {
   let urlSearchParams = new URLSearchParams(location.search.slice(1));
   const value = urlSearchParams.get("holiday");
   //value === 새해
-  console.log(value, typeof value);
-  console.log(location.search);
+  // console.log(location.search); //?holiday=새해
+  // console.log(value, typeof value); //새해, string
 
-  const holidayName = HolidayDetailData[value];
+  const { id, name, image, description } = HolidayDetailData[value];
+  // description: "새해는 달력상으로 ... "
+  // id: "-Qyo5MsYy"
+  // image: "img/newYear.png"
 
   return (
     <div>
-      <HolidayDetail holidayName={holidayName} />
+      <HolidayDetail
+        name={name}
+        id={id}
+        image={image}
+        description={description}
+      />
     </div>
   );
 };

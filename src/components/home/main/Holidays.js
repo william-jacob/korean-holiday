@@ -30,6 +30,7 @@ const Holidays = () => {
       try {
         const response = await axios.get(url);
         const { item } = response.data.response.body.items;
+        console.log(item);
         setHolidayData(item); //item이 배열 이고 이 배열안에 객체들이 존재
       } catch (e) {
         alert(e);
