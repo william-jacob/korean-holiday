@@ -15,14 +15,12 @@ const DetailPage = ({ location }) => {
   // image: "img/newYear.png"
 
   return (
-    <div>
-      <HolidayDetail
-        name={name}
-        id={id}
-        image={image}
-        description={description}
-      />
-    </div>
+    <HolidayDetail
+      name={name}
+      id={id}
+      image={image}
+      description={description}
+    />
   );
 };
 

@@ -6,14 +6,15 @@ const ButtonWrapper = styled.span`
   display: inline-block; //span에서 padding 사용하기 위함
   padding: 5px;
   margin: 5px;
-  border: 1px solid blue;
   border-radius: 10px;
+  background-color: white;
 `;
 
 const Button = styled.button`
   outline: none;
   border: none;
-  background-color: transparent; //배경색 투명
+  // width: 100%;
+  background-color: white;
   color: blue;
   cursor: pointer;
 `;

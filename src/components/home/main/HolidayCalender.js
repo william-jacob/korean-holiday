@@ -6,8 +6,13 @@ import styled from "@emotion/styled";
 import dayjs from "dayjs";
 
 const CalenderWrapper = styled.div`
-  width: 500px;
+  width: 700px;
   height: auto;
+  margin-top: 30px;
+`;
+
+const CalenderTitle = styled.div`
+  text-align: center;
 `;
 
 const HolidayCalender = ({ holidayDate, holidayDateAgain, flag }) => {
@@ -47,7 +52,11 @@ const HolidayCalender = ({ holidayDate, holidayDateAgain, flag }) => {
   if (flag) {
     return (
       <CalenderWrapper>
-        <Calendar onSelect={onSelect} fullscreen={false} />
+        <Calendar
+          onSelect={onSelect}
+          fullscreen={false}
+          style={{ borderRadius: "20px" }}
+        />
       </CalenderWrapper>
     );
   }
@@ -55,18 +64,19 @@ const HolidayCalender = ({ holidayDate, holidayDateAgain, flag }) => {
     <CalenderWrapper>
       <div className="site-calendar-customize-header-wrapper">
         <Calendar
+          style={{ borderRadius: "20px" }}
           value={holidayDate}
           fullscreen={false}
           //customize-calendar-header
           headerRender={() => {
             return (
-              <div>
-                <Typography.Title level={4}>
+              <CalenderTitle>
+                <Typography.Title level={3}>
                   {holidayFullDate
                     ? holidayFullDate
                     : dayjs().format("YYYY. M. D")}
                 </Typography.Title>
-              </div>
+              </CalenderTitle>
             );
           }}
         />

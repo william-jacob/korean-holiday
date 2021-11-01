@@ -8,10 +8,18 @@ import HolidayYear from "./HolidayYear";
 import Holiday from "./Holiday";
 import HolidayCalender from "./HolidayCalender";
 
+const HolidayWrapper = styled.div`
+  width: 700px;
+  height: auto;
+  margin-left: 50px;
+`;
+
 const Button = styled.button`
   outline: none;
   border: none;
-  background-color: transparent;
+  background-color: white;
+  border-radius: 10px;
+  margin: 10px 0 30px 550px;
   cursor: pointer;
 `;
 
@@ -30,7 +38,6 @@ const Holidays = () => {
       try {
         const response = await axios.get(url);
         const { item } = response.data.response.body.items;
-        console.log(item);
         setHolidayData(item); //item이 배열 이고 이 배열안에 객체들이 존재
       } catch (e) {
         alert(e);
@@ -61,7 +68,8 @@ const Holidays = () => {
         onPlusAYear={onPlusAYear}
         onMinusAYear={onMinusAYear}
       />
-      <div>
+
+      <HolidayWrapper>
         {holidayData?.map((v, i) => (
           <Holiday
             key={shortid.generate()}
@@ -70,7 +78,7 @@ const Holidays = () => {
             onClickDate={onClickDate}
           />
         ))}
-      </div>
+      </HolidayWrapper>
 
       <HolidayCalender
         holidayDate={holidayDate}
