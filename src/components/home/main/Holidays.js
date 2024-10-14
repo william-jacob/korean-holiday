@@ -33,7 +33,7 @@ const Holidays = () => {
   const url = `/getHoliDeInfo?serviceKey=${process.env.REACT_APP_API_KEY}&&_type=json&solYear=${holidayYear}&numOfRows=100`;
 
   useEffect(() => {
-    //바로 return 해주면 안되네
+    //바로 return x
     const getHolidaysData = async () => {
       try {
         const response = await axios.get(url);
